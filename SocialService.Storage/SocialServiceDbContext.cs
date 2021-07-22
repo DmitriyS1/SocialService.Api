@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SocialService.Storage.ValueObjects;
+using SocialService.Storage.Entities;
 
 namespace SocialService.Storage
 {

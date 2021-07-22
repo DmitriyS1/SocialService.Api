@@ -1,4 +1,4 @@
-﻿namespace SocialService.Storage.ValueObjects
+﻿namespace SocialService.Storage.Entities
 {
     public class User
     {
