@@ -11,5 +11,10 @@ namespace SocialService.Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        [HttpPost("registration")]
+        public async Task<IActionResult> Registration()
+        {
+
+        }
     }
 }
