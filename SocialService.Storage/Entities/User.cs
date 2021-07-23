@@ -1,7 +1,11 @@
-﻿namespace SocialService.Storage.Entities
+﻿using System;
+
+namespace SocialService.Storage.Entities
 {
     public class User
     {
+        public Guid Id { get; set; }
+
         public string Login { get; set; }
 
         public int Popularity { get; set; }

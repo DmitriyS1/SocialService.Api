@@ -1,4 +1,5 @@
-﻿using SocialService.Repositories.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialService.Repositories.Interfaces;
 using SocialService.Storage;
 using SocialService.Storage.Entities;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace SocialService.Repositories
             _dbContext.Users.Add(user);
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetAsync(string login)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Login == login);
+
+            return user;
         }
     }
 }

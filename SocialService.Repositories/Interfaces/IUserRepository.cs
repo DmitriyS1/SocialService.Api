@@ -6,5 +6,7 @@ namespace SocialService.Repositories.Interfaces
     interface IUserRepository
     {
         Task CreateAsync(User user);
+
+        Task<User> GetAsync(string login);
     }
 }
