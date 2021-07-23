@@ -8,6 +8,8 @@ namespace SocialService.Storage.Entities
 
         public string Login { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public int Popularity { get; set; }
     }
 }
