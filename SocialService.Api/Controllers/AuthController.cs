@@ -14,7 +14,7 @@ namespace SocialService.Api.Controllers
         [HttpPost("registration")]
         public async Task<IActionResult> Registration()
         {
-
+            return Ok();
         }
     }
 }
