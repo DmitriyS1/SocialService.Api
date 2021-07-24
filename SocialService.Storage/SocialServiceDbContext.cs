@@ -6,5 +6,8 @@ namespace SocialService.Storage
     public class SocialServiceDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+
+        public SocialServiceDbContext(DbContextOptions<SocialServiceDbContext> options) 
+            : base(options) { }
     }
 }
