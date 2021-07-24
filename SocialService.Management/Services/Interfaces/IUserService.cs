@@ -10,5 +10,12 @@ namespace SocialService.Management.Services.Interfaces
         /// </summary>
         /// <param name="user">New user dto</param>
         Task AddAsync(UserDto user);
+
+        /// <summary>
+        /// Find user by login
+        /// </summary>
+        /// <param name="login">User login</param>
+        /// <returns>Founded user or null</returns>
+        Task<UserDto> GetAsync(string login);
     }
 }

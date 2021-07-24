@@ -14,9 +14,13 @@ namespace SocialService.Management.Services
             _userRepository = userRepository;
         }
 
-        /// <inheritdoc/>
         public async Task AddAsync(UserDto user)
         {
+            if (await _userRepository.IsExist(user.Login))
+            {
+                throw new System.Exception();
+            }
+
             await _userRepository.CreateAsync(
                 new Storage.Entities.User 
                 { 
@@ -25,6 +29,17 @@ namespace SocialService.Management.Services
                     Popularity = user.Popularity,
                     CreatedAt = System.DateTime.UtcNow
                 });
+        }
+
+        public async Task<UserDto> GetAsync(string login)
+        {
+            var user = await _userRepository.GetAsync(login);
+            if (user is null)
+            {
+                return null;
+            }
+
+            return new UserDto(user.Id, user.Login, user.Popularity);
         }
     }
 }
