@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialService.Api", "Social
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialService.Storage", "SocialService.Storage\SocialService.Storage.csproj", "{458695A4-9B02-49CE-8C4E-37172D6E41A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialService.Repositories", "SocialService.Repositories\SocialService.Repositories.csproj", "{B33F05E0-D079-4176-8467-AA7E2A1B3D5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialService.Repositories", "SocialService.Repositories\SocialService.Repositories.csproj", "{B33F05E0-D079-4176-8467-AA7E2A1B3D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialService.Management", "SocialService.Management\SocialService.Management.csproj", "{7E14CF75-75B4-4713-AE45-8CE3CA2CB51D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B33F05E0-D079-4176-8467-AA7E2A1B3D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B33F05E0-D079-4176-8467-AA7E2A1B3D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B33F05E0-D079-4176-8467-AA7E2A1B3D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E14CF75-75B4-4713-AE45-8CE3CA2CB51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E14CF75-75B4-4713-AE45-8CE3CA2CB51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E14CF75-75B4-4713-AE45-8CE3CA2CB51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E14CF75-75B4-4713-AE45-8CE3CA2CB51D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

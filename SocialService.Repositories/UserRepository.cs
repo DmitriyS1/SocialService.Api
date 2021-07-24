@@ -28,5 +28,10 @@ namespace SocialService.Repositories
 
             return user;
         }
+
+        public async Task<bool> IsExist(string login)
+        {
+            return await _dbContext.Users.AnyAsync(x => x.Login == login);
+        }
     }
 }

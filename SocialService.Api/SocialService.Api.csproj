@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SocialService.Management\SocialService.Management.csproj" />
     <ProjectReference Include="..\SocialService.Storage\SocialService.Storage.csproj" />
   </ItemGroup>
 
