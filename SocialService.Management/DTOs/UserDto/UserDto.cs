@@ -4,8 +4,27 @@ namespace SocialService.Management.DTOs.UserDto
 {
     public class UserDto
     {
-        public Guid Id { get; set; }
+        public UserDto(
+            Guid id,
+            string login,
+            int popularity)
+        {
+            Id = id;
+            Login = login;
+            Popularity = popularity;
+        }
 
-        public string Login { get; set; }
+        public UserDto(string login)
+        {
+            Id = Guid.NewGuid();
+            Login = login;
+            Popularity = 0;
+        }
+
+        public Guid Id { get; }
+
+        public string Login { get; }
+
+        public int Popularity { get; }
     }
 }
