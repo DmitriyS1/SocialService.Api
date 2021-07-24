@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SocialService.Repositories.Interfaces
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         Task CreateAsync(User user);
 
