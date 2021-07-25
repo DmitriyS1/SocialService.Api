@@ -27,6 +27,7 @@ namespace SocialService.Api.Controllers
             _logger = logger;
         }
 
+        [HttpPost("followers")]
         public async Task<IActionResult> Follow([FromBody] string userLogin, [FromBody] string followingLogin)
         {
             if (userLogin == followingLogin)

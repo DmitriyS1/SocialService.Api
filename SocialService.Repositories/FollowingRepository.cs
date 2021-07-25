@@ -19,7 +19,7 @@ namespace SocialService.Repositories
 
         public async Task AddFollowing(Guid userId, Guid followingId)
         {
-            var following = new UserFollower { UserId = userId, FollowerId = followingId };
+            var following = new UserFollower { UserId = followingId, FollowerId = userId };
             _dbContext.UsersFollowers.Add(following);
 
             await _dbContext.SaveChangesAsync();
@@ -27,7 +27,7 @@ namespace SocialService.Repositories
 
         public async Task<bool> IsExist(Guid followerId, Guid followingId) 
             => await _dbContext.UsersFollowers
-                .Where(uf => uf.UserId == followerId && uf.FollowerId == followingId)
+                .Where(uf => uf.UserId == followingId && uf.FollowerId == followerId)
                 .AnyAsync();
     }
 }
