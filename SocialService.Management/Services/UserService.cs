@@ -57,7 +57,7 @@ namespace SocialService.Management.Services
             if (users.Count != logins.Count)
             {
                 _logger.LogError($"User with id {logins.Where(l => !users.Select(u => u.Login).Contains(l)).FirstOrDefault()} does not exist");
-                return null;
+                return new List<UserDto>();
             }
 
             return Map(users);

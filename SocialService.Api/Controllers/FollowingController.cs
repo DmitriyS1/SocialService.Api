@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SocialService.Api.ViewModels.Following;
 using SocialService.Management.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,23 +29,29 @@ namespace SocialService.Api.Controllers
         }
 
         [HttpPost("followers")]
-        public async Task<IActionResult> Follow([FromBody] string userLogin, [FromBody] string followingLogin)
+        public async Task<IActionResult> Follow([FromBody] FollowingViewModel model)
         {
-            if (userLogin == followingLogin)
+            if (string.IsNullOrWhiteSpace(model.UserLogin) || string.IsNullOrWhiteSpace(model.FollowingLogin))
             {
-                _logger.LogWarning($"User with login = {userLogin} attempts to follow {followingLogin}");
+                _logger.LogWarning($"ModelError: userLogin = {model.UserLogin} and followingLogin = {model.FollowingLogin}");
+                return BadRequest("Empty login");
+            }
+
+            if (model.UserLogin == model.FollowingLogin)
+            {
+                _logger.LogWarning($"User with login = {model.UserLogin} attempts to follow {model.FollowingLogin}");
                 return StatusCode(422, "You can't follow yourself");
             }
 
-            var users = await _userService.GetAsync(new List<string> { followingLogin, userLogin });
+            var users = await _userService.GetAsync(new List<string> { model.FollowingLogin, model.UserLogin });
             if (users.Count != USERS_COUNT_FOR_FOLLOW_OPERATION)
             {
                 return StatusCode(422, "User you trying to follow not found");
             }
 
             await _followingService.FollowAsync(
-                users.Where(u => u.Login == userLogin).First(),
-                users.Where(u => u.Login == followingLogin).First());
+                users.Where(u => u.Login == model.UserLogin).First(),
+                users.Where(u => u.Login == model.FollowingLogin).First());
 
             return Ok();
         }

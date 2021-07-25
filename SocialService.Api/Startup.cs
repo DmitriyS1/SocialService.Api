@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SocialService.Api.Middlewares;
+using SocialService.Management.Extensions;
 using SocialService.Storage;
 using System.Linq;
 
@@ -23,8 +25,14 @@ namespace SocialService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(cnf => cnf.AddConsole())
+                .Configure<LoggerFilterOptions>(opt => opt.MinLevel = LogLevel.Warning);
+
             services.AddDbContext<SocialServiceDbContext>(
                 opts => opts.UseSqlite(Configuration.GetConnectionString("SocialServiceDb")));
+
+            services.AddRepositories();
+            services.AddServices();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -41,6 +49,7 @@ namespace SocialService.Api
                 app.UseDeveloperExceptionPage();
                 
             }
+            app.UseMiddleware<ExceptionMiddleware>();
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -65,5 +74,7 @@ namespace SocialService.Api
                 endpoints.MapControllers();
             });
         }
+
+        
     }
 }
