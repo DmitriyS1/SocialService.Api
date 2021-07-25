@@ -21,6 +21,11 @@ namespace SocialService.Repositories.Interfaces
         /// <returns>User entity or null</returns>
         Task<User?> GetAsync(string login);
 
+        /// <summary>
+        /// Get users by logins
+        /// </summary>
+        /// <param name="logins">List of logins</param>
+        /// <returns>Collection of users</returns>
         Task<IReadOnlyCollection<User>> GetAsync(List<string> logins);
 
         /// <summary>
