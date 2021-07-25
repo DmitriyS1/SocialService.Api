@@ -29,6 +29,13 @@ namespace SocialService.Repositories.Interfaces
         Task<IReadOnlyCollection<User>> GetAsync(List<string> logins);
 
         /// <summary>
+        /// Get top popular users
+        /// </summary>
+        /// <param name="count">Count of top users</param>
+        /// <returns>Requested count of popular users</returns>
+        Task<IReadOnlyCollection<User>> GetPopularAsync(int count);
+
+        /// <summary>
         /// Check if user already exists
         /// </summary>
         /// <param name="login">User login</param>

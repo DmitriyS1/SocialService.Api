@@ -40,6 +40,16 @@ namespace SocialService.Repositories
             return users;
         }
 
+        public async Task<IReadOnlyCollection<User>> GetPopularAsync(int count)
+        {
+            var users = await _dbContext.Users
+                .OrderBy(u => u.Popularity)
+                .Take(count)
+                .ToListAsync();
+
+            return users;
+        }
+
         public async Task<bool> IsExist(string login)
         {
             return await _dbContext.Users.AnyAsync(x => x.Login == login);

@@ -11,5 +11,10 @@ namespace SocialService.Storage
 
         public SocialServiceDbContext(DbContextOptions<SocialServiceDbContext> options) 
             : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            mb.ApplyConfigurationsFromAssembly(typeof(SocialServiceDbContext).Assembly);
+        }
     }
 }
