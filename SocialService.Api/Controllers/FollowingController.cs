@@ -14,7 +14,18 @@ namespace SocialService.Api.Controllers
     public class FollowingController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IFollowingService _followingService;
         private readonly ILogger<FollowingController> _logger; 
+
+        public FollowingController(
+            IUserService userService,
+            IFollowingService followingService,
+            ILogger<FollowingController> logger)
+        {
+            _userService = userService;
+            _followingService = followingService;
+            _logger = logger;
+        }
 
         public async Task<IActionResult> Follow([FromBody] string followingLogin, [FromBody] string followerLogin)
         {

@@ -1,6 +1,10 @@
-﻿using SocialService.Management.DTOs.UserDto;
+﻿using Microsoft.Extensions.Logging;
+using SocialService.Management.DTOs.UserDto;
 using SocialService.Management.Services.Interfaces;
 using SocialService.Repositories.Interfaces;
+using SocialService.Storage.Entities;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialService.Management.Services
@@ -8,8 +12,11 @@ namespace SocialService.Management.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(
+            IUserRepository userRepository,
+            ILogger<UserService> logger)
         {
             _userRepository = userRepository;
         }
@@ -22,7 +29,7 @@ namespace SocialService.Management.Services
             }
 
             await _userRepository.CreateAsync(
-                new Storage.Entities.User 
+                new User 
                 { 
                     Id = user.Id,
                     Login = user.Login,
@@ -39,7 +46,30 @@ namespace SocialService.Management.Services
                 return null;
             }
 
-            return new UserDto(user.Id, user.Login, user.Popularity);
+            return Map(new List<User> { user }).FirstOrDefault();
+        }
+
+        public async Task<IReadOnlyCollection<UserDto>> GetAsync(List<string> logins)
+        {
+            var users = await _userRepository.GetAsync(logins);
+            if (users.Count != logins.Count)
+            {
+                _logger.LogError($"User with id {logins.Where(l => !users.Select(u => u.Login).Contains(l)).FirstOrDefault()}");
+                return null;
+            }
+
+            return Map(users);
+        }
+
+        private IReadOnlyCollection<UserDto> Map(IReadOnlyCollection<User> users)
+        {
+            var userDtos = new List<UserDto>();
+            foreach(var user in users)
+            {
+                userDtos.Add(new UserDto(user.Id, user.Login, user.Popularity));
+            }
+
+            return userDtos;
         }
     }
 }
