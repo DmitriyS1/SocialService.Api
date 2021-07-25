@@ -19,12 +19,14 @@ namespace SocialService.Management.Services
             ILogger<UserService> logger)
         {
             _userRepository = userRepository;
+            _logger = logger;
         }
 
         public async Task AddAsync(UserDto user)
         {
             if (await _userRepository.IsExist(user.Login))
             {
+                _logger.LogError($"User with login {user.Login} already exist");
                 throw new System.Exception();
             }
 
@@ -54,7 +56,7 @@ namespace SocialService.Management.Services
             var users = await _userRepository.GetAsync(logins);
             if (users.Count != logins.Count)
             {
-                _logger.LogError($"User with id {logins.Where(l => !users.Select(u => u.Login).Contains(l)).FirstOrDefault()}");
+                _logger.LogError($"User with id {logins.Where(l => !users.Select(u => u.Login).Contains(l)).FirstOrDefault()} does not exist");
                 return null;
             }
 

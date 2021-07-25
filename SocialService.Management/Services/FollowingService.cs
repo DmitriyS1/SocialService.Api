@@ -19,9 +19,15 @@ namespace SocialService.Management.Services
             _logger = logger;
         }
 
-        public async Task FollowAsync(UserDto followingUser, UserDto followerUser)
+        public async Task FollowAsync(UserDto follower, UserDto following)
         {
-            throw new System.NotImplementedException();
+            if (await _followingRepository.IsExist(follower.Id, following.Id))
+            {
+                _logger.LogError($"Following connection between {follower.Id} and {following.Id} already exist");
+                return;
+            }
+
+            await _followingRepository.AddFollowing(follower.Id, following.Id);
         }
     }
 }

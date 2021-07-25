@@ -1,7 +1,9 @@
-﻿using SocialService.Repositories.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialService.Repositories.Interfaces;
 using SocialService.Storage;
 using SocialService.Storage.Entities;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialService.Repositories
@@ -22,5 +24,10 @@ namespace SocialService.Repositories
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> IsExist(Guid followerId, Guid followingId) 
+            => await _dbContext.UsersFollowers
+                .Where(uf => uf.UserId == followerId && uf.FollowerId == followingId)
+                .AnyAsync();
     }
 }

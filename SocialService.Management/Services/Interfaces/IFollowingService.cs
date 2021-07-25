@@ -5,6 +5,6 @@ namespace SocialService.Management.Services.Interfaces
 {
     public interface IFollowingService
     {
-        Task FollowAsync(UserDto followingUser, UserDto followerUser);
+        Task FollowAsync(UserDto follower, UserDto following);
     }
 }

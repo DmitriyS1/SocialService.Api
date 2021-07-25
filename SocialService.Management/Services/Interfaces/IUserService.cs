@@ -1,4 +1,5 @@
 ﻿using SocialService.Management.DTOs.UserDto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SocialService.Management.Services.Interfaces
@@ -17,5 +18,12 @@ namespace SocialService.Management.Services.Interfaces
         /// <param name="login">User login</param>
         /// <returns>Founded user or null</returns>
         Task<UserDto> GetAsync(string login);
+
+        /// <summary>
+        /// Find users by their ids
+        /// </summary>
+        /// <param name="logins">List of user ids</param>
+        /// <returns>Collection of users</returns>
+        Task<IReadOnlyCollection<UserDto>> GetAsync(List<string> logins);
     }
 }
