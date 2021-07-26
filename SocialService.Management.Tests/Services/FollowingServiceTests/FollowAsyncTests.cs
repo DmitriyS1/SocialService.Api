@@ -12,8 +12,8 @@ namespace SocialService.Management.Tests.Services.FollowingServiceTests
 {
     public class FollowAsyncTests
     {
-        private Mock<IFollowingRepository> _followingRepository;
-        private Mock<ILogger<FollowingService>> _logger;
+        private readonly Mock<IFollowingRepository> _followingRepository;
+        private readonly Mock<ILogger<FollowingService>> _logger;
 
         public FollowAsyncTests()
         {

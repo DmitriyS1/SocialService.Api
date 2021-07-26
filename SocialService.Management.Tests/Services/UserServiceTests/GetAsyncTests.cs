@@ -13,8 +13,8 @@ namespace SocialService.Management.Tests.Services.UserServiceTests
 {
     public class GetAsyncTests
     {
-        private Mock<IUserRepository> _userRepositoryMock;
-        private Mock<ILogger<UserService>> _logger;
+        private readonly Mock<IUserRepository> _userRepositoryMock;
+        private readonly Mock<ILogger<UserService>> _logger;
 
         public GetAsyncTests()
         {

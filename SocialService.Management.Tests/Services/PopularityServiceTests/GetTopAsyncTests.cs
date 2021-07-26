@@ -2,10 +2,7 @@
 using SocialService.Repositories.Interfaces;
 using SocialService.Management.Services;
 using SocialService.Storage.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,7 +10,7 @@ namespace SocialService.Management.Tests.Services.PopularityServiceTests
 {
     public class GetTopAsyncTests
     {
-        private Mock<IUserRepository> _userRepository;
+        private readonly Mock<IUserRepository> _userRepository;
 
         public GetTopAsyncTests()
         {
