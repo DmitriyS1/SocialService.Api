@@ -33,7 +33,7 @@ namespace SocialService.Api.Controllers
 
             var newUser = new UserDto(login);
             await _userService.AddAsync(newUser);
-            return Ok();
+            return StatusCode(201);
         }
     }
 }
