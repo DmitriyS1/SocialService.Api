@@ -17,7 +17,7 @@ namespace SocialService.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddFollowing(Guid userId, Guid followingId)
+        public async Task AddFollowingAsync(Guid userId, Guid followingId)
         {
             var following = new UserFollower { UserId = followingId, FollowerId = userId };
             _dbContext.UsersFollowers.Add(following);
