@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SocialService.Management.DTOs.UserDto;
+using SocialService.Management.Services.Exceptions;
 using SocialService.Management.Services.Interfaces;
 using SocialService.Repositories.Interfaces;
 using SocialService.Storage.Entities;
@@ -27,7 +28,7 @@ namespace SocialService.Management.Services
             if (await _userRepository.IsExist(user.Login))
             {
                 _logger.LogError($"User with login {user.Login} already exist");
-                throw new System.Exception();
+                throw new BusinessException(200, "User already exist");
             }
 
             await _userRepository.CreateAsync(

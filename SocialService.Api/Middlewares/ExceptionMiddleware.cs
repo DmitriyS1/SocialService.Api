@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using SocialService.Management.Services.Exceptions;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -21,20 +22,24 @@ namespace SocialService.Api.Middlewares
             {
                 await _next(httpContext);
             }
+            catch (BusinessException ex)
+            {
+                await HandleExceptionAsync(httpContext, ex.Message, ex.StatusCode);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                await HandleExceptionAsync(httpContext, ex);
+                await HandleExceptionAsync(httpContext);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, string message = "", int statusCode = 0)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             await context.Response.WriteAsync(new ErrorDetails()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error from the custom middleware."
+                StatusCode = statusCode == 0 ? context.Response.StatusCode : statusCode,
+                Message = string.IsNullOrWhiteSpace(message) ? "Internal Server Error." : message
             }.ToString());
         }
     }

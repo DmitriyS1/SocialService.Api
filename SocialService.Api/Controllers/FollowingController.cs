@@ -53,7 +53,7 @@ namespace SocialService.Api.Controllers
                 users.Where(u => u.Login == model.UserLogin).First(),
                 users.Where(u => u.Login == model.FollowingLogin).First());
 
-            return Ok();
+            return StatusCode(201);
         }
     }
 }

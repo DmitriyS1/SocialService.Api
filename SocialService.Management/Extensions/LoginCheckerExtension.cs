@@ -13,6 +13,11 @@ namespace SocialService.Management.Extensions
                 return false;
             }
 
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                return false;
+            }
+
             var regexp = new Regex("^[A-Za-z ]+$");
             if (!regexp.IsMatch(login))
             {

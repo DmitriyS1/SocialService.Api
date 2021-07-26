@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SocialService.Management.DTOs.UserDto;
+using SocialService.Management.Services.Exceptions;
 using SocialService.Management.Services.Interfaces;
 using SocialService.Repositories.Interfaces;
 using System.Threading.Tasks;
@@ -24,10 +25,10 @@ namespace SocialService.Management.Services
             if (await _followingRepository.IsExist(follower.Id, following.Id))
             {
                 _logger.LogError($"Following connection between {follower.Id} and {following.Id} already exist");
-                return;
+                throw new BusinessException(200, "You already following this user");
             }
 
-            await _followingRepository.AddFollowing(follower.Id, following.Id);
+            await _followingRepository.AddFollowingAsync(follower.Id, following.Id);
         }
     }
 }
